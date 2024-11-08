@@ -9,3 +9,17 @@ To map precisely the reads corresponding to the circular junction regions at the
 
 ![Fig_namexxxx!](Fig1.tif)
 
+## Filtering mutect2 output of full length (FL) mapping:
+
+This code parses and filters mutect2 output of FL mapping, selects single nucleotide events, inverts alleles if necessary to have major allele (MaA) counts in field 5 and minor allele (MiA) counts in field 6 adding the “i” sufix to both alleles in REF and ALT if inversion is made, eliminates strand bias both in MaA and MiA keeping only those in which strand ratios fall within the range 0.66-1.5, selects events in which MiA depth is at least 10 with at least five events on each strand, eliminates 1kb from each tail and head ends, and calculates allele frequency (MiA/MaA). Oneliners are separate so that progress can be verified at each step during test runs before batch runs are made.
+
+```
+zcat seqfile_FL.vcf.gz |\
+grep ^chrM |\
+awk '{print $2"\t"$4"\t"$5"\t"$10}' |\
+awk -F':' '{print $1"\t"$2"\t"$4"\t"$7}' |\
+grep '  0/1     ' |\
+awk -F',' '{print $1"\t"$2"\t"$3"\t"$4"\t"$5}'|\
+awk '{if ($5 < $6) print $1"\t"$3"i\t"$2"i\t"$4"\t"$6"\t"$5"\t"$7"\t"$10"\t"$11"\t"$8"\t"$9; else print $0}'|\
+awk '($1>1000) && ($1<15300) && ($11 ? $10/$11<=1.5 : 0) && ($10 ? $11/$10<=1.5 : 0) && ($8/$9<=1.5) && ($9/$8<=1.5) && $10>=5 && $11 >=5 {print $0"\t"$6/$7}'> seqfile_FL.fltrd
+```
