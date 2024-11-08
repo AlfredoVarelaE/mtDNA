@@ -13,7 +13,7 @@ To map precisely the reads corresponding to the circular junction regions at the
 
 This code parses and filters mutect2 output of FL mapping, selects single nucleotide events, inverts alleles if necessary to have major allele (MaA) counts in field 5 and minor allele (MiA) counts in field 6 adding the “i” sufix to both alleles in REF and ALT if inversion is made, eliminates strand bias both in MaA and MiA keeping only those in which strand ratios fall within the range 0.66-1.5, selects events in which MiA depth is at least 10 with at least five events on each strand, eliminates 1kb from each tail and head ends, and calculates allele frequency (MiA/MaA). Oneliners are separate so that progress can be verified at each step during test runs before batch runs are made.
 
-```
+```bash
 zcat seqfile_FL.vcf.gz |\
 grep ^chrM |\
 awk '{print $2"\t"$4"\t"$5"\t"$10}' |\
