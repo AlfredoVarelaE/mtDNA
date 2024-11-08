@@ -9,7 +9,7 @@ Alfredo Varela-Echavarría, Kenya L. Contreras-Ramírez, Carlos Lozano-Flores, a
 
 To map precisely the reads corresponding to the circular junction regions at the D-loop, tail-to-head junction sequences were made for the human mitochondrial genome by joining the 3kb of the end of the rCRS reference genome to 3kb of the start of the same sequence (THjnct)(Figure below). All reads from each sample were then aligned to the THjnct sequence and the full length linear sequence (FL).
 
-
+![Strategy to generate tail-to-head-junction!](Fig2.png)
 
  This code parses and filters mutect2 output of FL mapping, selects single nucleotide events, inverts alleles if necessary to have major allele (MaA) counts in field 5 and minor allele (MiA) counts in field 6 adding the “i” sufix to both alleles in REF and ALT if inversion is made, eliminates strand bias both in MaA and MiA keeping only those in which strand ratios fall within the range 0.66-1.5, selects events in which MiA depth is at least 10 with at least five events on each strand, eliminates 1kb from each tail and head ends, and calculates allele frequency (MiA/MaA). Oneliners are separate so that progress can be verified at each step during test runs before batch runs are made.
 
