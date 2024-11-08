@@ -7,7 +7,7 @@ Alfredo Varela-Echavarría, Kenya L. Contreras-Ramírez, Carlos Lozano-Flores, a
 
 To map precisely the reads corresponding to the circular junction regions at the D-loop, tail-to-head junction sequences were made for the mouse mitochondrial genome by joining the 3kb of the end of the mm39 reference genome to 3kb of the start of the same sequence (THjnct)(Figure below). All reads from each sample were then aligned to the THjnct sequence and the full length linear sequence (FL). The example shown is for mouse and a similar strategy was employed for the human mitochondrial genome.
 
-![Fig_namexxxx!](Fig1.tif)
+![Fig_namexxxx!](Fig1.png)
 
 ## Filtering mutect2 output of full length (FL) mapping:
 
